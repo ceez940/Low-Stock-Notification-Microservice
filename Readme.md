@@ -16,3 +16,5 @@ To check inventory, it sends a POST request to /notification/check with a list. 
 POST /notification/check: sends list, receives low stock items
 POST /notification/send: sends alert, reveives alert
 GET /notification/histroy: reveives all alerts
+
+
