@@ -17,4 +17,112 @@ POST /notification/check: sends list, receives low stock items
 POST /notification/send: sends alert, reveives alert
 GET /notification/histroy: reveives all alerts
 
+### **Check Inventory Example Call**
 
+**Request:**
+```bash
+POST http://localhost:4000/notification/check
+Content-Type: application/json
+```
+
+```json
+{
+  "inventory": [
+    {"name": "Tomatoes", "quantity": 3, "lowLimit": 5},
+    {"name": "Limes", "quantity": 2, "lowLimit": 5},
+    {"name": "Onions", "quantity": 10, "lowLimit": 4}
+  ]
+}
+```
+
+**Response:**
+```json
+{
+  "lowItems": [
+    {
+      "itemName": "Tomatoes",
+      "quantity": 3,
+      "lowLimit": 5,
+      "notiSent": true,
+      "timestamp": "Mon Nov 18 12:00:00 2024"
+    },
+    {
+      "itemName": "Limes",
+      "quantity": 2,
+      "lowLimit": 5,
+      "notiSent": true,
+      "timestamp": "Mon Nov 18 12:00:00 2024"
+    }
+  ],
+  "timestamp": "Mon Nov 18 12:00:00 2024"
+}
+```
+
+---
+
+### **Send Notification Example Call**
+
+**Request:**
+```bash
+POST http://localhost:4000/notification/send
+Content-Type: application/json
+```
+
+```json
+{
+  "itemName": "Garlic",
+  "quantity": 1,
+  "lowLimit": 3
+}
+```
+
+**Response:**
+```json
+{
+  "alert": {
+    "itemName": "Garlic",
+    "quantity": 1,
+    "lowLimit": 3,
+    "notiSent": true,
+    "timestamp": "Mon Nov 18 12:01:00 2024"
+  }
+}
+```
+
+---
+
+### **View Notification Example Call**
+
+**Request:**
+```bash
+GET http://localhost:4000/notification/history
+```
+
+**Response:**
+```json
+{
+  "history": [
+    {
+      "itemName": "Tomatoes",
+      "quantity": 3,
+      "lowLimit": 5,
+      "notiSent": true,
+      "timestamp": "Mon Nov 18 12:00:00 2024"
+    },
+    {
+      "itemName": "Limes",
+      "quantity": 2,
+      "lowLimit": 5,
+      "notiSent": true,
+      "timestamp": "Mon Nov 18 12:00:00 2024"
+    },
+    {
+      "itemName": "Garlic",
+      "quantity": 1,
+      "lowLimit": 3,
+      "notiSent": true,
+      "timestamp": "Mon Nov 18 12:01:00 2024"
+    }
+  ]
+}
+```
